@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "cloud-image": "/uni_modules/uni-id-pages/components/cloud-image/cloud-image"
+  },
+  "component": true
+}

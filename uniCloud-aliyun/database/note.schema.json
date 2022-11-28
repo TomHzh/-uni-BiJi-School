@@ -1,0 +1,62 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": ["user_id","title"],
+	"permission": {
+		"read": "doc.user_id==auth.uid",
+		"create": "auth.uid !=null",
+		"update": "doc.user_id==auth.uid",
+		"delete": "doc.user_id==auth.uid"
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"user_id":{
+					"bsonType": "string",
+					"description": "用户id",
+					"foreignKey": "uni-id-users._id",
+					"defaultValue":{
+						"$env":"uid"
+					}
+	},
+		"title":{
+			"bsonType": "string",
+			"title": "笔记标题",
+			"description": "笔记的标题",
+			"errorMessage":"标题需要必须填写",
+			"trim": "both"
+		},
+		"subhead":{
+			"bsonType": "string",
+			"title": "笔记小标题",
+			"description": "笔记的小标题",
+			"trim": "both"
+		},
+		"content":{
+			"bsonType": "string",
+			"title": "内容",
+			"description": "笔记内容",
+			"trim": "both"
+		},
+		"audio":{
+			"bsonType": "string",
+			"title": "音频",
+			"description": "音频链接",
+			"trim": "both"
+		},
+		"picurls":{
+			"bsonType": "string",
+			"title": "封面大图",
+			"description": "缩略图地址",
+			"trim": "both"
+		},
+		"posttime":{
+			"bsonType": "timestamp",
+			"title": "发布时间",
+			"defaultValue":{//默认值
+				"$env":"now"//自动生时间戳
+			}
+		}
+	}
+}

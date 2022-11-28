@@ -1,0 +1,29 @@
+
+ uni-image{
+	border-radius: 50%;
+}
+.box{
+	overflow: hidden;
+	width: 16vw;
+	height: 16vw;
+	border-radius: 50%;
+}
+.imahe{
+	display: block;
+			width: 16vw;
+			height: 16vw;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+}
+.chooseAvatar {
+	display: block;
+	width: 16vw;
+	height: 16vw;
+	border-radius: 50%;
+}
+.showBorder{
+	border: solid 1px #ddd;
+}
+

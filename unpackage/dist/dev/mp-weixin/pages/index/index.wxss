@@ -1,0 +1,121 @@
+
+ .u-popup__content__close--top-right .u-icon__icon > ._span {
+  font-size: 40rpx;
+}
+.uni-file-picker {
+  margin: 60rpx 0 30rpx 0;
+}
+.uni-section {
+  margin-bottom: 20rpx;
+  background-color: transparent;
+}
+ .uni-fab__circle--rightBottom {
+  right: calc(65rpx + 0px);
+}
+ .u-loading-icon__spinner {
+  width: 40rpx !important;
+  height: 40rpx !important;
+}
+.imga {
+  width: 100vw;
+  position: absolute;
+}
+.imga image {
+  display: block;
+  width: 100vw;
+  height: 400rpx;
+}
+.biji {
+  border-radius: 60rpx 60rpx 0 0;
+  background-color: #f4f4f4;
+  position: relative;
+  top: 140px;
+}
+.mar .top {
+  width: 90vw;
+  margin: 0 auto;
+}
+.mar .top .shang {
+  display: flex;
+  width: 300rpx;
+  justify-content: space-between;
+  line-height: 90rpx;
+}
+.mar .sou {
+  width: 90vw;
+  margin: 0 auto;
+}
+.box .pan .xun {
+  width: 90vw;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 30rpx;
+  margin-bottom: 20rpx;
+}
+.box .pan .xun2 {
+  width: 90vw;
+  margin: 0 auto;
+  background-color: #767a82;
+  border-radius: 30rpx;
+  margin-bottom: 20rpx;
+}
+.box .pan .xun .ka {
+  width: 80vw;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.box .pan .xun .ka .text {
+  margin: 30rpx 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  line-height: 50rpx;
+}
+.box .pan .xun .ka .text ._h2 {
+  font-weight: 600;
+}
+.box .pan .xun .ka .text ._span {
+  color: #7e7e7e;
+}
+.box .pan .xun .ka .right {
+  width: 130rpx;
+  height: 130rpx;
+}
+.box .pan .xun .ka .right image {
+  display: block;
+  width: 130rpx;
+  height: 130rpx;
+}
+.box .pan .xun2 .ka {
+  width: 80vw;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.box .pan .xun2 .ka .text {
+  margin: 30rpx 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  line-height: 50rpx;
+}
+.box .pan .xun2 .ka .text ._h2 {
+  font-weight: 600;
+  color: #fff;
+}
+.box .pan .xun2 .ka .text ._span {
+  color: #efefef;
+}
+.box .pan .xun2 .ka .right {
+  width: 130rpx;
+  height: 130rpx;
+}
+.box .pan .xun2 .ka .right image {
+  display: block;
+  width: 130rpx;
+  height: 130rpx;
+}
+

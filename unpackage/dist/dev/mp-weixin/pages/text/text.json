@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u--textarea": "/node-modules/uview-ui/components/u--textarea/u--textarea",
+    "u--input": "/node-modules/uview-ui/components/u--input/u--input",
+    "mp-html": "/components/mp-html/mp-html",
+    "u-toast": "/node-modules/uview-ui/components/u-toast/u-toast"
+  }
+}
