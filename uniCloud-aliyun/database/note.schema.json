@@ -45,6 +45,12 @@
 			"description": "音频链接",
 			"trim": "both"
 		},
+		"audioName":{
+			"bsonType": "string",
+			"title": "音频名称",
+			"description": "音频名称",
+			"trim": "both"
+		},
 		"picurls":{
 			"bsonType": "string",
 			"title": "封面大图",

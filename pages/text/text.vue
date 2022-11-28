@@ -1,7 +1,12 @@
 <template>
 	<view class="box">
 		<view class="date">
-			<i class="iconfont" data-method="undo" @tap="edit">
+			<view class="left">
+				<u-icon @click="sjou" name="arrow-left" size="50"></u-icon>
+			</view>
+			
+			<view class="right">
+				<i class="iconfont" data-method="undo" @tap="edit">
 				<uni-icons type="undo-filled" size="25" color="#5e6d82"></uni-icons>
 			</i>
 			<i class="iconfont" data-method="redo" @tap="edit">
@@ -10,12 +15,19 @@
 			<i @tap="save">
 				<uni-icons type="checkmarkempty" size="28"></uni-icons>
 			</i>
+			</view>
+			
 		</view>
 
 		<view class="editor_toolbox">
 			<i class="iconfont icon-img" data-method="insertImg" @tap="edit" />
+			<!-- 音频 -->
+			<i class="iconfont">
+				<uni-icons type="mic" size="26" @click="audiodd"></uni-icons>
+				</i>
+			
+			
 			<i class="iconfont icon-video" data-method="insertVideo" @tap="edit" />
-			<uni-icons type="mic" size="30" @click="audiodd"></uni-icons>
 			<i class="iconfont icon-link" data-method="insertLink" @tap="edit" />
 			<i class="iconfont icon-text" data-method="insertText" @tap="edit" />
 			<i class="iconfont icon-clear" @tap="clear" />
@@ -27,22 +39,35 @@
 			<!-- 小标题 -->
 			<u--input class="inputXi" placeholder="请输入副标题" border="none" v-model="value" prefixIcon="pushpin">
 			</u--input>
-
+			
 			<mp-html ref="article" container-style="padding:20px" :content="content"
 				domain="https://mp-html.oss-cn-hangzhou.aliyuncs.com" :editable="editable" placeholder='开始书写'
 				@remove="remove" />
 		</view>
-		<!-- 音频 -->
-		<!-- <uni-file-picker 
-			v-model="list" 
-			fileMediatype="all" 
-			mode="grid" 
-			file-extname="mp3"
-			@select="select" 
-			@progress="progress" 
-			@success="success" 
-			@fail="fail" 
-		/> -->
+		
+		<!-- 音频显示 -->
+		<view class="boxmic" v-if="current.src">
+			<view class="contmic">
+				<view class="leftmic">
+					
+						<image class="tumic" :src="current.poster" mode=""></image>
+							<image class="icon-playmic" :src="playImage" @click="play"></image>
+				</view>
+				<view class="rightmic">
+					<view class="">
+						<p class="namemic">{{current.name}}</p>
+					<p class="authormic">{{current.author}}</p>
+					</view>
+					<view class="timemic">
+						<span>{{current.time}} / {{current.zongT}}</span>
+					</view>
+				</view>
+			</view>
+			<u-line-progress :percentage="percentage" :showText="false" activeColor="#3c9cff"></u-line-progress>
+		</view>
+		
+		<!-- 地图 -->
+		
 
 		<block v-if="modal">
 			<view class="mask" />
@@ -102,6 +127,7 @@
 	export default {
 		data() {
 			return {
+				
 				list:[],
 				value1: '',
 				value: '',
@@ -118,6 +144,20 @@
 				id: '',
 				// 音乐本地链接
 				// 音频所需
+				// 进度条
+				percentage:0,
+				isPlaying: false,
+				current: {
+					poster:'/static/img/audio.jpg',
+					name: '音频',
+					author: '只能上传并保存一首音频',
+					time:'00:00',
+					zongT:'',
+					src: '',
+				},
+				
+				// 地图所需
+			
 			}
 		},
 		components: {
@@ -261,37 +301,137 @@
 			}
 		},
 
+		
+		computed: {
+			playImage() {
+				return this.isPlaying ? "/static/stop.png" : "/static/play.png";
+			}
+		},
 		methods: {
+			// 返回首页
+			sjou(){
+				uni.switchTab({
+					url:'/pages/index/index'
+				})
+			},
 			// 上传音频
+			createAudio(){
+				var innerAudioContext = this._audioContext = uni.createInnerAudioContext();
+				innerAudioContext.autoplay = false;
+				innerAudioContext.src = this.current.src;
+				innerAudioContext.onCanplay(()=>{
+					var zongTime=Math.round(innerAudioContext.duration);
+					this.current.zongT=this.timeZhuan(zongTime)
+				})
+				innerAudioContext.onPlay(() => {
+				  console.log('开始播放');
+				  
+				});
+				innerAudioContext.onEnded(()=>{
+					this.isPlaying=false;
+				})
+				innerAudioContext.onError((res) => {
+				  console.log(res.errMsg);
+				  console.log(res.errCode);
+				});
+			},
+			play(){
+				if(this.isPlaying){
+					console.log('111');
+					this._audioContext.pause();
+					this.isPlaying=false;
+				}else{
+					this.isPlaying = true;
+				this._audioContext.play();
+				setInterval(this.time, 1000)
+				// this.isPlaying=false;
+				}
+			
+			},
+			//封装时间格式转换
+			timeZhuan(theTime){
+				const h = parseInt( theTime / 3600)
+								      const minute = parseInt( theTime / 60 % 60)
+								      const second = Math.ceil( theTime % 60)
+				const hours = h < 10 ? '0' + h : h
+				     const formatSecond = second > 59 ? 59 : second
+				     return `${hours > 0 ? `${hours}:` : ''}${minute < 10 ? '0' + minute : minute}:${formatSecond < 10 ? '0' + formatSecond : formatSecond}`;
+			},
+			time(){
+				var theTime=Math.round(this._audioContext.currentTime)
+			this.current.time=this.timeZhuan(theTime);
+			},
 			// 获取上传状态
-						select(e){
-							console.log('选择文件：',e)
-						},
-						// 获取上传进度
-						progress(e){
-							console.log('上传进度：',e)
-						},
-						
-						// 上传成功
-						success(e){
-							console.log('上传成功',e)
-							this.list=e.tempFiles
-						},
-						
-						// 上传失败
-						fail(e){
-							console.log('上传失败：',e)
-						},
 			audiodd() {
 				console.log('ghg');
+				uni.chooseFile({
+					count:1,
+					type:'all',
+					extension:['mp3'],
+					success: (res) => {
+						console.log('au',res);
+						this.current.name=res.tempFiles[0].name
+						this.audiodData(res.tempFiles[0])
+						uni.showLoading({
+							title: '上传中'
+						});
+					}
+				})
+			},
+			// 音频上传云存储
+			audiodData(data){
+				console.log(data);
+				
+				uniCloud.uploadFile({
+					filePath:data.path,
+					cloudPath:data.name,
+					onUploadProgress: (progressEvent)=> {
+					          // console.log(progressEvent);
+					          var percentCompleted = Math.round(
+					            (progressEvent.loaded * 100) / progressEvent.total
+					          );
+							  // console.log(percentCompleted);
+							  this.percentage=percentCompleted
+						},
+				}).then((res)=>{
+					this.current.src=res.fileID
+					this.createAudio()
+					uni.hideLoading();
+						uni.showToast({
+							title: '音频上传成功',
+							duration: 1500
+						});
+					// console.log('chuan',res.fileID);
+					// db.collection('note').doc(this.id).update({
+					// 	audio:res.fileID,
+					// 	audioName:this.current.name
+					// }).then((resd)=>{
+					// 	// console.log('yin',resd);
+					// 	this.current.src=res.fileID
+					// 	this.createAudio()
+					// 	this.percentage=0
+					// 	uni.hideLoading();
+					// 	uni.showToast({
+					// 		title: '音频上传成功',
+					// 		duration: 2000
+					// 	});
+					// })
+					// .catch((err)=>{
+					// 	// console.log();
+					// })
+				})
 			},
 			// 查询对应数据
 			getDataXiang(id) {
 				db.collection("note").doc(id).get().then(
 					(res) => {
+						console.log(res);
 						this.value1 = res.result.data[0].title;
 						this.value = res.result.data[0].subhead;
 						this.content = res.result.data[0].content;
+						this.current.src=res.result.data[0].audio;
+						this.current.name=res.result.data[0].audioName;
+						this.createAudio()
 					})
 			},
 			//打开底部状态栏
@@ -316,6 +456,9 @@
 				 console.log(this.picurls, typeof(this.picurls));
 
 					let data = {
+
+						audio:this.current.src,
+						audioName:this.current.name,
 						title: this.value1,
 						subhead: this.value,
 						content: this.$refs.article.getContent(),
@@ -328,6 +471,7 @@
 							}).then(
 								(res) => {
 									// console.log(res);
+									this.createAudio()
 									uni.showToast({
 										title: '保存成功'
 									})
@@ -460,12 +604,19 @@
 
 	/* 保存顶部样式 */
 	.date {
-		position: absolute;
-		right: 0;
-		margin-top: -60rpx;
-	}
+		display: flex;
+		width: 96vw;
+		margin: 0 auto;
+		justify-content: space-between;
 
-	.date i {
+	}
+	/deep/ .left .u-icon__icon{
+		font-size: 50rpx !important;
+	}
+	.date .right{
+
+	}
+	.date .right i {
 		padding-right: 30rpx;
 	}
 
@@ -589,6 +740,7 @@
 		margin: 0 auto;
 		padding-top: 10vw;
 		background-color: #fff;
+		margin-bottom: 150rpx;
 	}
 
 	.contmic {
@@ -629,10 +781,14 @@
 	.rightmic .namemic {
 		line-height: 70rpx;
 		color: #fff;
+		width: 260rpx;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap
 	}
 
 	.rightmic .authormic {
-		color: #55ff00;
+		color: #fff;
 	}
 
 	.rightmic .timemic {
@@ -640,4 +796,5 @@
 		margin-right: 5vw;
 		color: #cfcfcf;
 	}
+	
 </style>

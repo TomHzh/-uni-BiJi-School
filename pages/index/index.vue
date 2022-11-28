@@ -330,7 +330,11 @@
 </script>
 
 <style lang="less">
-	page {}
+	
+	page {
+		margin: 0;
+		padding: 0;
+	}
 
 	// /deep/.u-upload__button{
 	// 	margin: 0;
