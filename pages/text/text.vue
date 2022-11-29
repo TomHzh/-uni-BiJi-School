@@ -22,9 +22,13 @@
 		<view class="editor_toolbox">
 			<i class="iconfont icon-img" data-method="insertImg" @tap="edit" />
 			<!-- 音频 -->
-			<i class="iconfont">
+			
+			<!-- #ifdef H5 -->
+			   <i class="iconfont">
 				<uni-icons type="mic" size="26" @click="audiodd"></uni-icons>
 				</i>
+			<!-- #endif -->
+			
 			
 			
 			<i class="iconfont icon-video" data-method="insertVideo" @tap="edit" />
@@ -44,9 +48,9 @@
 				domain="https://mp-html.oss-cn-hangzhou.aliyuncs.com" :editable="editable" placeholder='开始书写'
 				@remove="remove" />
 		</view>
-		
 		<!-- 音频显示 -->
-		<view class="boxmic" v-if="current.src">
+		<uni-section class="audioApp" title="只支持在网页上传音频" v-if="current.src" type="line">
+		<view class="boxmic">
 			<view class="contmic">
 				<view class="leftmic">
 					
@@ -56,15 +60,17 @@
 				<view class="rightmic">
 					<view class="">
 						<p class="namemic">{{current.name}}</p>
-					<p class="authormic">{{current.author}}</p>
+					<!-- <p class="authormic">{{current.author}}</p> -->
 					</view>
 					<view class="timemic">
 						<span>{{current.time}} / {{current.zongT}}</span>
 					</view>
 				</view>
+				<p class="authormic">{{current.author}}</p>
 			</view>
 			<u-line-progress :percentage="percentage" :showText="false" activeColor="#3c9cff"></u-line-progress>
 		</view>
+		</uni-section>
 		
 		<!-- 地图 -->
 		
@@ -164,6 +170,17 @@
 			mpHtml
 		},
 		onLoad(e) {
+			
+			// APP：
+			// #ifdef APP-PLUS
+			    
+
+			// #endif
+			// H5:
+			// #ifdef H5
+			   
+			// #endif
+
 			this.getDataXiang(e.id);
 			this.id = e.id;
 			console.log('swa', this.id);
@@ -362,7 +379,10 @@
 			this.current.time=this.timeZhuan(theTime);
 			},
 			// 获取上传状态
-			audiodd() {
+		
+			//h5上传
+			// #ifdef H5
+			  audiodd() {
 				console.log('ghg');
 				uni.chooseFile({
 					count:1,
@@ -401,26 +421,10 @@
 							title: '音频上传成功',
 							duration: 1500
 						});
-					// console.log('chuan',res.fileID);
-					// db.collection('note').doc(this.id).update({
-					// 	audio:res.fileID,
-					// 	audioName:this.current.name
-					// }).then((resd)=>{
-					// 	// console.log('yin',resd);
-					// 	this.current.src=res.fileID
-					// 	this.createAudio()
-					// 	this.percentage=0
-					// 	uni.hideLoading();
-					// 	uni.showToast({
-					// 		title: '音频上传成功',
-					// 		duration: 2000
-					// 	});
-					// })
-					// .catch((err)=>{
-					// 	// console.log();
-					// })
 				})
-			},
+			}, 
+			// #endif
+			
 			// 查询对应数据
 			getDataXiang(id) {
 				db.collection("note").doc(id).get().then(
@@ -787,14 +791,19 @@
 		white-space: nowrap
 	}
 
-	.rightmic .authormic {
-		color: #fff;
+	.authormic {
+		color: #ff9900;
+		margin-left: 170rpx;
 	}
 
 	.rightmic .timemic {
 		line-height: 70rpx;
 		margin-right: 5vw;
 		color: #cfcfcf;
+		height: 20rpx;
 	}
-	
+	.audioApp{
+		background-color:#f5f5f5;
+	}
+
 </style>

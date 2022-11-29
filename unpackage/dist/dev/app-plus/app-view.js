@@ -9407,6 +9407,8 @@ try {
       .default,
     "u-Input": __webpack_require__(/*! uview-ui/components/u--input/u--input.vue */ 293).default,
     mpHtml: __webpack_require__(/*! @/components/mp-html/mp-html.vue */ 306).default,
+    uniSection: __webpack_require__(/*! @/uni_modules/uni-section/components/uni-section/uni-section.vue */ 160)
+      .default,
     uLineProgress: __webpack_require__(/*! uview-ui/components/u-line-progress/u-line-progress.vue */ 332)
       .default,
     uToast: __webpack_require__(/*! uview-ui/components/u-toast/u-toast.vue */ 102).default
@@ -9519,24 +9521,27 @@ var render = function() {
               }
             }
           }),
-          _c(
-            "i",
-            { staticClass: _vm._$g(13, "sc"), attrs: { _i: 13 } },
-            [
-              _c("uni-icons", {
-                attrs: { _i: 14 },
-                on: {
-                  click: function($event) {
-                    return _vm.$handleViewEvent($event)
-                  }
-                }
-              })
-            ],
-            1
-          ),
+          _c("i", {
+            staticClass: _vm._$g(13, "sc"),
+            attrs: { "data-method": "insertVideo", _i: 13 },
+            on: {
+              click: function($event) {
+                return _vm.$handleViewEvent($event)
+              }
+            }
+          }),
+          _c("i", {
+            staticClass: _vm._$g(14, "sc"),
+            attrs: { "data-method": "insertLink", _i: 14 },
+            on: {
+              click: function($event) {
+                return _vm.$handleViewEvent($event)
+              }
+            }
+          }),
           _c("i", {
             staticClass: _vm._$g(15, "sc"),
-            attrs: { "data-method": "insertVideo", _i: 15 },
+            attrs: { "data-method": "insertText", _i: 15 },
             on: {
               click: function($event) {
                 return _vm.$handleViewEvent($event)
@@ -9545,25 +9550,7 @@ var render = function() {
           }),
           _c("i", {
             staticClass: _vm._$g(16, "sc"),
-            attrs: { "data-method": "insertLink", _i: 16 },
-            on: {
-              click: function($event) {
-                return _vm.$handleViewEvent($event)
-              }
-            }
-          }),
-          _c("i", {
-            staticClass: _vm._$g(17, "sc"),
-            attrs: { "data-method": "insertText", _i: 17 },
-            on: {
-              click: function($event) {
-                return _vm.$handleViewEvent($event)
-              }
-            }
-          }),
-          _c("i", {
-            staticClass: _vm._$g(18, "sc"),
-            attrs: { _i: 18 },
+            attrs: { _i: 16 },
             on: {
               click: function($event) {
                 return _vm.$handleViewEvent($event)
@@ -9577,7 +9564,7 @@ var render = function() {
         "uni-view",
         {
           staticStyle: { "margin-top": "80rpx" },
-          attrs: { _i: 19 },
+          attrs: { _i: 17 },
           on: {
             click: function($event) {
               return _vm.$handleViewEvent($event)
@@ -9586,25 +9573,25 @@ var render = function() {
         },
         [
           _c("u--textarea", {
-            attrs: { _i: 20 },
+            attrs: { _i: 18 },
             model: {
-              value: _vm._$g(20, "v-model"),
+              value: _vm._$g(18, "v-model"),
               callback: function() {},
               expression: "value1"
             }
           }),
           _c("u--input", {
-            staticClass: _vm._$g(21, "sc"),
-            attrs: { _i: 21 },
+            staticClass: _vm._$g(19, "sc"),
+            attrs: { _i: 19 },
             model: {
-              value: _vm._$g(21, "v-model"),
+              value: _vm._$g(19, "v-model"),
               callback: function() {},
               expression: "value"
             }
           }),
           _c("mp-html", {
             ref: "article",
-            attrs: { _i: 22 },
+            attrs: { _i: 20 },
             on: {
               remove: function($event) {
                 return _vm.$handleViewEvent($event)
@@ -9614,107 +9601,120 @@ var render = function() {
         ],
         1
       ),
-      _vm._$g(23, "i")
+      _vm._$g(21, "i")
         ? _c(
-            "uni-view",
-            { staticClass: _vm._$g(23, "sc"), attrs: { _i: 23 } },
+            "uni-section",
+            { staticClass: _vm._$g(21, "sc"), attrs: { _i: 21 } },
             [
               _c(
                 "uni-view",
-                { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
+                { staticClass: _vm._$g(22, "sc"), attrs: { _i: 22 } },
                 [
                   _c(
                     "uni-view",
-                    { staticClass: _vm._$g(25, "sc"), attrs: { _i: 25 } },
-                    [
-                      _c("v-uni-image", {
-                        staticClass: _vm._$g(26, "sc"),
-                        attrs: { src: _vm._$g(26, "a-src"), mode: "", _i: 26 }
-                      }),
-                      _c("v-uni-image", {
-                        staticClass: _vm._$g(27, "sc"),
-                        attrs: { src: _vm._$g(27, "a-src"), _i: 27 },
-                        on: {
-                          click: function($event) {
-                            return _vm.$handleViewEvent($event)
-                          }
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _c(
-                    "uni-view",
-                    { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
+                    { staticClass: _vm._$g(23, "sc"), attrs: { _i: 23 } },
                     [
                       _c(
                         "uni-view",
-                        { attrs: { _i: 29 } },
+                        { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
                         [
-                          _c(
-                            "p",
-                            {
-                              staticClass: _vm._$g(30, "sc"),
-                              attrs: { _i: 30 }
-                            },
-                            [_vm._v(_vm._$g(30, "t0-0"))]
-                          ),
-                          _c(
-                            "p",
-                            {
-                              staticClass: _vm._$g(31, "sc"),
-                              attrs: { _i: 31 }
-                            },
-                            [_vm._v(_vm._$g(31, "t0-0"))]
-                          )
+                          _c("v-uni-image", {
+                            staticClass: _vm._$g(25, "sc"),
+                            attrs: {
+                              src: _vm._$g(25, "a-src"),
+                              mode: "",
+                              _i: 25
+                            }
+                          }),
+                          _c("v-uni-image", {
+                            staticClass: _vm._$g(26, "sc"),
+                            attrs: { src: _vm._$g(26, "a-src"), _i: 26 },
+                            on: {
+                              click: function($event) {
+                                return _vm.$handleViewEvent($event)
+                              }
+                            }
+                          })
                         ],
                         1
                       ),
                       _c(
                         "uni-view",
-                        { staticClass: _vm._$g(32, "sc"), attrs: { _i: 32 } },
+                        { staticClass: _vm._$g(27, "sc"), attrs: { _i: 27 } },
                         [
-                          _c("span", { attrs: { _i: 33 } }, [
-                            _vm._v(
-                              _vm._$g(33, "t0-0") + " / " + _vm._$g(33, "t0-1")
-                            )
-                          ])
+                          _c(
+                            "uni-view",
+                            { attrs: { _i: 28 } },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass: _vm._$g(29, "sc"),
+                                  attrs: { _i: 29 }
+                                },
+                                [_vm._v(_vm._$g(29, "t0-0"))]
+                              )
+                            ],
+                            1
+                          ),
+                          _c(
+                            "uni-view",
+                            {
+                              staticClass: _vm._$g(30, "sc"),
+                              attrs: { _i: 30 }
+                            },
+                            [
+                              _c("span", { attrs: { _i: 31 } }, [
+                                _vm._v(
+                                  _vm._$g(31, "t0-0") +
+                                    " / " +
+                                    _vm._$g(31, "t0-1")
+                                )
+                              ])
+                            ],
+                            1
+                          )
                         ],
                         1
+                      ),
+                      _c(
+                        "p",
+                        { staticClass: _vm._$g(32, "sc"), attrs: { _i: 32 } },
+                        [_vm._v(_vm._$g(32, "t0-0"))]
                       )
                     ],
                     1
-                  )
+                  ),
+                  _c("u-line-progress", { attrs: { _i: 33 } })
                 ],
                 1
-              ),
-              _c("u-line-progress", { attrs: { _i: 34 } })
+              )
             ],
             1
           )
         : _vm._e(),
-      _vm._$g(35, "i")
+      _vm._$g(34, "i")
         ? [
             _c("uni-view", {
-              staticClass: _vm._$g(36, "sc"),
-              attrs: { _i: 36 }
+              staticClass: _vm._$g(35, "sc"),
+              attrs: { _i: 35 }
             }),
             _c(
               "uni-view",
-              { staticClass: _vm._$g(37, "sc"), attrs: { _i: 37 } },
+              { staticClass: _vm._$g(36, "sc"), attrs: { _i: 36 } },
               [
                 _c(
                   "uni-view",
-                  { staticClass: _vm._$g(38, "sc"), attrs: { _i: 38 } },
-                  [_vm._v(_vm._$g(38, "t0-0"))]
+                  { staticClass: _vm._$g(37, "sc"), attrs: { _i: 37 } },
+                  [_vm._v(_vm._$g(37, "t0-0"))]
                 ),
                 _c("v-uni-input", {
-                  staticClass: _vm._$g(39, "sc"),
+                  staticClass: _vm._$g(38, "sc"),
                   attrs: {
-                    value: _vm._$g(39, "a-value"),
+                    value: _vm._$g(38, "a-value"),
                     maxlength: "-1",
                     "auto-focus": true,
-                    _i: 39
+                    _i: 38
                   },
                   on: {
                     input: function($event) {
@@ -9724,13 +9724,13 @@ var render = function() {
                 }),
                 _c(
                   "uni-view",
-                  { staticClass: _vm._$g(40, "sc"), attrs: { _i: 40 } },
+                  { staticClass: _vm._$g(39, "sc"), attrs: { _i: 39 } },
                   [
                     _c(
                       "uni-view",
                       {
-                        staticClass: _vm._$g(41, "sc"),
-                        attrs: { _i: 41 },
+                        staticClass: _vm._$g(40, "sc"),
+                        attrs: { _i: 40 },
                         on: {
                           click: function($event) {
                             return _vm.$handleViewEvent($event)
@@ -9742,12 +9742,12 @@ var render = function() {
                     _c(
                       "uni-view",
                       {
-                        staticClass: _vm._$g(42, "sc"),
+                        staticClass: _vm._$g(41, "sc"),
                         staticStyle: {
                           color: "#576b95",
                           "border-left": "1px solid rgba(0,0,0,.1)"
                         },
-                        attrs: { _i: 42 },
+                        attrs: { _i: 41 },
                         on: {
                           click: function($event) {
                             return _vm.$handleViewEvent($event)
@@ -9766,8 +9766,8 @@ var render = function() {
         : _vm._e(),
       _c("u-toast", {
         ref: "uToast",
-        staticClass: _vm._$g(43, "sc"),
-        attrs: { _i: 43 }
+        staticClass: _vm._$g(42, "sc"),
+        attrs: { _i: 42 }
       })
     ],
     2
@@ -12103,7 +12103,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../HBuilderX.3.5.3.20220729/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 13);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.box[data-v-a156c514] {\n\tmargin-top: 150rpx;\n}\n\n/* 小标题 */\n.inputXi[data-v-a156c514] {\n\tmargin-top: 20rpx\n}\n\n/* 提示样式 */\n[data-v-a156c514] .u-icon__icon {\n\tfont-size: 20px !important;\n}\n\n/* 去除标题底色 */\n.u-textarea[data-v-a156c514] {\n\tbackground-color: transparent;\n\tfont-weight: 700;\n}\n.uni-textarea-compute[data-v-a156c514],\n.uni-textarea-line[data-v-a156c514],\n.uni-textarea-placeholder[data-v-a156c514],\n.uni-textarea-textarea[data-v-a156c514] {\n\tfont-size: 16px;\n\tline-height: 16px;\n}\n[data-v-a156c514] .uni-textarea-textarea {\n\tcolor: #000;\n}\n\n/* 保存顶部样式 */\n.date[data-v-a156c514] {\n\tdisplay: flex;\n\twidth: 96vw;\n\tmargin: 0 auto;\n\tjustify-content: space-between;\n}\n[data-v-a156c514] .left .u-icon__icon{\n\tfont-size: 50rpx !important;\n}\n.date .right[data-v-a156c514]{\n}\n.date .right i[data-v-a156c514] {\n\tpadding-right: 30rpx;\n}\n.editor_toolbox[data-v-a156c514] {\n\tposition: fixed;\n\tbottom: 0;\n\twidth: 100%;\n\tz-index: 999;\n\tbackground-color: #f6f6f8;\n\tborder-bottom: 30rpx solid #f6f6f8;\n\tdisplay: flex;\n\tpadding: 5px;\n\talign-items: center;\n\tbox-sizing: border-box;\n\tline-height: 1.6;\n}\n@font-face {\n\tfont-family: \"iconfont\";\n\tsrc: url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2');\n}\n.iconfont[data-v-a156c514] {\n\tflex: 1;\n\ttext-align: center;\n\tfont-family: \"iconfont\" !important;\n\tfont-size: 22px;\n\tfont-style: normal;\n\t-webkit-font-smoothing: antialiased;\n\t-moz-osx-font-smoothing: grayscale;\n}\n.iconfont[data-v-a156c514]:active {\n\tcolor: red;\n}\n.icon-undo[data-v-a156c514]:before {\n\tcontent: \"\\e607\";\n}\n.icon-redo[data-v-a156c514]:before {\n\tcontent: \"\\e606\";\n}\n.icon-img[data-v-a156c514]:before {\n\tcontent: \"\\e6e2\";\n}\n.icon-video[data-v-a156c514]:before {\n\tcontent: \"\\e798\";\n}\n.icon-link[data-v-a156c514]:before {\n\tcontent: \"\\e60d\";\n}\n.icon-text[data-v-a156c514]:before {\n\tcontent: \"\\e6ce\";\n}\n.icon-clear[data-v-a156c514]:before {\n\tcontent: \"\\e637\";\n}\n.icon-save[data-v-a156c514]:before {\n\tcontent: \"\\e501\";\n}\n\n/* 模态框 */\n.modal[data-v-a156c514] {\n\tposition: fixed;\n\ttop: 50%;\n\tleft: 16px;\n\tright: 16px;\n\tbackground-color: #fff;\n\tborder-radius: 12px;\n\t-webkit-transform: translateY(-50%);\n\t        transform: translateY(-50%);\n}\n.modal_title[data-v-a156c514] {\n\tpadding: 32px 24px 16px;\n\tfont-size: 17px;\n\tfont-weight: 700;\n\ttext-align: center;\n}\n.modal_input[data-v-a156c514] {\n\tdisplay: block;\n\tpadding: 5px;\n\tmargin: 0 24px 32px 24px;\n\tfont-size: 14px;\n\tborder: 1px solid #dfe2e5;\n}\n.modal_foot[data-v-a156c514] {\n\tdisplay: flex;\n\tline-height: 56px;\n\tfont-weight: 700;\n\tborder-top: 1px solid rgba(0, 0, 0, .1);\n}\n.modal_button[data-v-a156c514] {\n\tflex: 1;\n\ttext-align: center;\n}\n\n/* 蒙版 */\n.mask[data-v-a156c514] {\n\tposition: fixed;\n\ttop: 0;\n\tright: 0;\n\tbottom: 0;\n\tleft: 0;\n\tbackground-color: black;\n\topacity: 0.5;\n}\n\n/* 音频样式 */\n.boxmic[data-v-a156c514] {\n\twidth: 90vw;\n\tmargin: 0 auto;\n\tpadding-top: 10vw;\n\tbackground-color: #fff;\n\tmargin-bottom: 150rpx;\n}\n.contmic[data-v-a156c514] {\n\theight: 20vw;\n\twidth: 90vw;\n\tmargin: 0 auto;\n\tmargin-top: -10vw;\n\tbackground-color: rgba(0, 0, 0, .5);\n\t/* filter: drop-shadow(\n\t0px 3rpx 5rpx rgba(85, 170, 255, 0.6) \n\t); */\n\t-webkit-filter: drop-shadow(0px 3rpx 9rpx rgba(0, 0, 0, 1));\n\t        filter: drop-shadow(0px 3rpx 9rpx rgba(0, 0, 0, 1));\n\tborder-radius: 15rpx;\n}\n.tumic[data-v-a156c514] {\n\theight: 20vw;\n\twidth: 20vw;\n\tposition: absolute;\n\tborder-radius: 15rpx;\n}\n.icon-playmic[data-v-a156c514] {\n\twidth: 5vw;\n\theight: 5vw;\n\tz-index: 999;\n\tmargin-left: 7vw;\n\tmargin-top: 7vw;\n}\n.rightmic[data-v-a156c514] {\n\tmargin-left: 23vw;\n\tmargin-top: -12vw;\n\tdisplay: flex;\n\tjustify-content: space-between;\n}\n.rightmic .namemic[data-v-a156c514] {\n\tline-height: 70rpx;\n\tcolor: #fff;\n\twidth: 260rpx;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap\n}\n.rightmic .authormic[data-v-a156c514] {\n\tcolor: #fff;\n}\n.rightmic .timemic[data-v-a156c514] {\n\tline-height: 70rpx;\n\tmargin-right: 5vw;\n\tcolor: #cfcfcf;\n}\n\n", ""]);
+exports.push([module.i, "\n.box[data-v-a156c514] {\n\tmargin-top: 150rpx;\n}\n\n/* 小标题 */\n.inputXi[data-v-a156c514] {\n\tmargin-top: 20rpx\n}\n\n/* 提示样式 */\n[data-v-a156c514] .u-icon__icon {\n\tfont-size: 20px !important;\n}\n\n/* 去除标题底色 */\n.u-textarea[data-v-a156c514] {\n\tbackground-color: transparent;\n\tfont-weight: 700;\n}\n.uni-textarea-compute[data-v-a156c514],\n.uni-textarea-line[data-v-a156c514],\n.uni-textarea-placeholder[data-v-a156c514],\n.uni-textarea-textarea[data-v-a156c514] {\n\tfont-size: 16px;\n\tline-height: 16px;\n}\n[data-v-a156c514] .uni-textarea-textarea {\n\tcolor: #000;\n}\n\n/* 保存顶部样式 */\n.date[data-v-a156c514] {\n\tdisplay: flex;\n\twidth: 96vw;\n\tmargin: 0 auto;\n\tjustify-content: space-between;\n}\n[data-v-a156c514] .left .u-icon__icon{\n\tfont-size: 50rpx !important;\n}\n.date .right[data-v-a156c514]{\n}\n.date .right i[data-v-a156c514] {\n\tpadding-right: 30rpx;\n}\n.editor_toolbox[data-v-a156c514] {\n\tposition: fixed;\n\tbottom: 0;\n\twidth: 100%;\n\tz-index: 999;\n\tbackground-color: #f6f6f8;\n\tborder-bottom: 30rpx solid #f6f6f8;\n\tdisplay: flex;\n\tpadding: 5px;\n\talign-items: center;\n\tbox-sizing: border-box;\n\tline-height: 1.6;\n}\n@font-face {\n\tfont-family: \"iconfont\";\n\tsrc: url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2');\n}\n.iconfont[data-v-a156c514] {\n\tflex: 1;\n\ttext-align: center;\n\tfont-family: \"iconfont\" !important;\n\tfont-size: 22px;\n\tfont-style: normal;\n\t-webkit-font-smoothing: antialiased;\n\t-moz-osx-font-smoothing: grayscale;\n}\n.iconfont[data-v-a156c514]:active {\n\tcolor: red;\n}\n.icon-undo[data-v-a156c514]:before {\n\tcontent: \"\\e607\";\n}\n.icon-redo[data-v-a156c514]:before {\n\tcontent: \"\\e606\";\n}\n.icon-img[data-v-a156c514]:before {\n\tcontent: \"\\e6e2\";\n}\n.icon-video[data-v-a156c514]:before {\n\tcontent: \"\\e798\";\n}\n.icon-link[data-v-a156c514]:before {\n\tcontent: \"\\e60d\";\n}\n.icon-text[data-v-a156c514]:before {\n\tcontent: \"\\e6ce\";\n}\n.icon-clear[data-v-a156c514]:before {\n\tcontent: \"\\e637\";\n}\n.icon-save[data-v-a156c514]:before {\n\tcontent: \"\\e501\";\n}\n\n/* 模态框 */\n.modal[data-v-a156c514] {\n\tposition: fixed;\n\ttop: 50%;\n\tleft: 16px;\n\tright: 16px;\n\tbackground-color: #fff;\n\tborder-radius: 12px;\n\t-webkit-transform: translateY(-50%);\n\t        transform: translateY(-50%);\n}\n.modal_title[data-v-a156c514] {\n\tpadding: 32px 24px 16px;\n\tfont-size: 17px;\n\tfont-weight: 700;\n\ttext-align: center;\n}\n.modal_input[data-v-a156c514] {\n\tdisplay: block;\n\tpadding: 5px;\n\tmargin: 0 24px 32px 24px;\n\tfont-size: 14px;\n\tborder: 1px solid #dfe2e5;\n}\n.modal_foot[data-v-a156c514] {\n\tdisplay: flex;\n\tline-height: 56px;\n\tfont-weight: 700;\n\tborder-top: 1px solid rgba(0, 0, 0, .1);\n}\n.modal_button[data-v-a156c514] {\n\tflex: 1;\n\ttext-align: center;\n}\n\n/* 蒙版 */\n.mask[data-v-a156c514] {\n\tposition: fixed;\n\ttop: 0;\n\tright: 0;\n\tbottom: 0;\n\tleft: 0;\n\tbackground-color: black;\n\topacity: 0.5;\n}\n\n/* 音频样式 */\n.boxmic[data-v-a156c514] {\n\twidth: 90vw;\n\tmargin: 0 auto;\n\tpadding-top: 10vw;\n\tbackground-color: #fff;\n\tmargin-bottom: 150rpx;\n}\n.contmic[data-v-a156c514] {\n\theight: 20vw;\n\twidth: 90vw;\n\tmargin: 0 auto;\n\tmargin-top: -10vw;\n\tbackground-color: rgba(0, 0, 0, .5);\n\t/* filter: drop-shadow(\n\t0px 3rpx 5rpx rgba(85, 170, 255, 0.6) \n\t); */\n\t-webkit-filter: drop-shadow(0px 3rpx 9rpx rgba(0, 0, 0, 1));\n\t        filter: drop-shadow(0px 3rpx 9rpx rgba(0, 0, 0, 1));\n\tborder-radius: 15rpx;\n}\n.tumic[data-v-a156c514] {\n\theight: 20vw;\n\twidth: 20vw;\n\tposition: absolute;\n\tborder-radius: 15rpx;\n}\n.icon-playmic[data-v-a156c514] {\n\twidth: 5vw;\n\theight: 5vw;\n\tz-index: 999;\n\tmargin-left: 7vw;\n\tmargin-top: 7vw;\n}\n.rightmic[data-v-a156c514] {\n\tmargin-left: 23vw;\n\tmargin-top: -12vw;\n\tdisplay: flex;\n\tjustify-content: space-between;\n}\n.rightmic .namemic[data-v-a156c514] {\n\tline-height: 70rpx;\n\tcolor: #fff;\n\twidth: 260rpx;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap\n}\n.authormic[data-v-a156c514] {\n\tcolor: #ff9900;\n\tmargin-left: 170rpx;\n}\n.rightmic .timemic[data-v-a156c514] {\n\tline-height: 70rpx;\n\tmargin-right: 5vw;\n\tcolor: #cfcfcf;\n\theight: 20rpx;\n}\n.audioApp[data-v-a156c514]{\n\tbackground-color:#f5f5f5;\n}\n\n", ""]);
 // Exports
 module.exports = exports;
 
