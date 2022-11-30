@@ -18,7 +18,7 @@
 			<!-- 搜索框 -->
 			<view class="sou">
 				<u-search bgColor="#fff" :clearabled="true" :showAction="false" shape="round" :animation="true"
-					searchIconSize="50" margin="50rpx 0" height="90rpx" placeholder="搜索笔记" v-model="keyword" @change="change"></u-search>
+					searchIconSize="50" margin="50rpx 0" height="70rpx" placeholder="搜索笔记" v-model="keyword" @change="change"></u-search>
 			</view>
 
 			<!-- 内容卡片 -->
@@ -52,7 +52,7 @@
 							</view>
 						</view>
 						<!-- 模态框 -->
-						<u-modal :show="showDatele" @confirm="confirmDatele(item._id)" @cancel="cancelDatele"
+						<u-modal :show="showDatele" @confirm="confirmDatele()" @cancel="cancelDatele"
 							ref="uModal" title="是否确认删除此条记录" showCancelButton confirmColor="#f56c6c"
 							cancelColor="#3c9cff" :asyncClose="true">
 						</u-modal>
@@ -142,15 +142,21 @@
 			}
 		},
 		async onLoad() {
-			await this.getData()
-			this.getuserStor()
+			if(uni.getStorageSync('uni_id_token')){
+				await this.getData()
+			
+			}	
 			this.getCover()
+			this.getuserStor()
 			this.empty()
 		},
 		onShow() {
-			this.getData()
+			if(uni.getStorageSync('uni_id_token')){
+				this.getData()
+				
+			}
+			// this.getCover()
 			this.getuserStor()
-			this.getCover()
 		},
 		methods: {
 			// 搜索框后
@@ -197,19 +203,20 @@
 				this.data = uni.getStorageSync('uni-id-pages-userInfo')
 			},
 			//删除对应笔记
-			deletes() {
+			deletes(e) {
 				this.showDatele = true
+				this.deleted_id=e
 			},
 			// 确认
-			confirmDatele(id) {
-				console.log(id);
-				db.collection("note").doc(id).remove().then(
+			confirmDatele() {
+				db.collection("note").doc(this.deleted_id).remove().then(
 					(res) => {
 						this.showDatele = false
 						uni.showToast({
 							title: '删除成功',
 							duration: 1500
 						});
+						this.getData()
 					})
 			},
 			// 取消
@@ -253,7 +260,22 @@
 			},
 
 			geng() {
-				this.show = true
+				if(uni.getStorageSync('uni_id_token')){
+					this.show = true
+				}else{
+					uni.showToast({
+						title: '请先登录',
+						duration: 1500,
+						icon:'error'
+					})
+					setTimeout(()=>{
+						uni.navigateTo({
+						url: '/uni_modules/uni-id-pages/pages/login/login-withpwd',
+					})
+					},500)
+					
+				}
+				
 			},
 			que() {
 				this.show = false;
@@ -432,7 +454,7 @@
 
 
 		.text {
-			margin: 30rpx 0;
+			margin: 20rpx 0;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
@@ -456,6 +478,7 @@
 				display: block;
 				width: 130rpx;
 				height: 130rpx;
+				border-radius: 20rpx;
 			}
 		}
 
@@ -495,6 +518,7 @@
 				display: block;
 				width: 130rpx;
 				height: 130rpx;
+				border-radius: 20rpx;
 			}
 		}
 

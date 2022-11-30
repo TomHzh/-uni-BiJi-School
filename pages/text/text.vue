@@ -34,6 +34,9 @@
 			<i class="iconfont icon-video" data-method="insertVideo" @tap="edit" />
 			<i class="iconfont icon-link" data-method="insertLink" @tap="edit" />
 			<i class="iconfont icon-text" data-method="insertText" @tap="edit" />
+			<i class="iconfont">
+							<uni-icons type="location" size="26" @click="gps"></uni-icons>
+							</i>
 			<i class="iconfont icon-clear" @tap="clear" />
 
 		</view>
@@ -48,6 +51,7 @@
 				domain="https://mp-html.oss-cn-hangzhou.aliyuncs.com" :editable="editable" placeholder='开始书写'
 				@remove="remove" />
 		</view>
+
 		<!-- 音频显示 -->
 		<uni-section class="audioApp" title="只支持在网页上传音频" v-if="current.src" type="line">
 		<view class="boxmic">
@@ -68,13 +72,47 @@
 				</view>
 				<p class="authormic">{{current.author}}</p>
 			</view>
-			<u-line-progress :percentage="percentage" :showText="false" activeColor="#3c9cff"></u-line-progress>
+			<u-line-progress 
+			:percentage="percentage" 
+			:showText="false" 
+			activeColor="#3c9cff"></u-line-progress>
 		</view>
 		</uni-section>
 		
 		<!-- 地图 -->
-		
+		<!-- #ifdef H5 -->
+		<u-popup 
+		:show="show" 
+		mode="top"
+		round=50
+		closeOnClickOverlay
+		@close="close"
+		 @open="open">
+		<view class="page-section">
+						<map style="width: 100%; height: 300px;" 
+						show-location
+						enable-zoom
+						:latitude="latitude"
+						:longitude="longitude" 
+						:markers="covers">
+						</map>
+					</view>
+					</u-popup>
+<!-- #endif -->
+<!-- #ifdef APP-PLUS -->
 
+		<view v-if="show" class="page-sectionAPP">
+						<map style="width: 100%; height: 300px;" 
+						show-location
+						v-if="cover"
+						enable-zoom
+						:latitude="latitude"
+						:longitude="longitude" 
+						:markers="covers">
+						</map>
+					</view>
+					<u-toast ref="uToastGps" ></u-toast>
+<!-- #endif -->
 		<block v-if="modal">
 			<view class="mask" />
 			<view class="modal">
@@ -163,27 +201,22 @@
 				},
 				
 				// 地图所需
-			
+				show:false,
+						latitude:null,
+						longitude:null ,
+						covers: [],
 			}
 		},
 		components: {
 			mpHtml
 		},
 		onLoad(e) {
-			
-			// APP：
-			// #ifdef APP-PLUS
-			    
-
-			// #endif
-			// H5:
-			// #ifdef H5
-			   
-			// #endif
-
-			this.getDataXiang(e.id);
-			this.id = e.id;
-			console.log('swa', this.id);
+			if(e){
+				this.getDataXiang(e.id);
+				this.id = e.id;
+				console.log('swa', this.id);
+			}
+			this.getGps()
 
 		},
 		onReady() {
@@ -322,7 +355,7 @@
 		computed: {
 			playImage() {
 				return this.isPlaying ? "/static/stop.png" : "/static/play.png";
-			}
+			},
 		},
 		methods: {
 			// 返回首页
@@ -425,6 +458,71 @@
 			}, 
 			// #endif
 			
+			
+			// 地图
+			gps(){
+				if(this.show){
+					this.show=false
+					// #ifdef APP-PLUS
+					let params={
+						type:'default',
+						message: "位置显示已关闭",
+					}
+					console.log(params);
+					this.$refs.uToastGps.show({
+						...params
+									})
+					// #endif
+				}else{
+					this.show=true
+					// #ifdef APP-PLUS
+					let params={
+						type:'default',
+						message: "位置已显示",
+					}
+					console.log(params);
+					this.$refs.uToastGps.show({
+						...params
+									})
+					// #endif
+				}
+				
+				
+			},
+			// 获取地图
+			getGps(){
+				uni.getLocation({
+					type:'gcj02',
+					isHighAccuracy:true,
+					altitude:true,
+					success: (res) => {
+						// console.log('坐标',res);
+						let covers=[{
+								id:0,
+								title:'所在位置',
+								latitude:res.latitude,
+								longitude:res.longitude,
+								iconPath: '/static/location.png',
+								width:50,
+								height:50,
+								
+						}]
+						this.cover=covers
+						this.latitude=res.latitude;
+						this.longitude=res.longitude;
+						
+						console.log(this.cover);
+						// this.cover.latitude=res.latitude;
+						// this.cover.longitude=res.longitude
+					}
+				})
+			},
+			close(){
+				this.show=false
+			},
+			open(){
+				
+			},
 			// 查询对应数据
 			getDataXiang(id) {
 				db.collection("note").doc(id).get().then(
@@ -457,8 +555,11 @@
 					var ctx = this.$refs.article
 					var cover = ctx.imgList;
 					this.picurls = cover[0]
-				 console.log(this.picurls, typeof(this.picurls));
-
+				 // console.log(this.picurls, typeof(this.picurls));
+				console.log('sss',this.$refs.article.imgList==0);
+				 if(this.$refs.article.imgList==0){
+					 this.picurls=''
+				 }
 					let data = {
 
 						audio:this.current.src,
@@ -805,5 +906,12 @@
 	.audioApp{
 		background-color:#f5f5f5;
 	}
-
+/* 地图 */
+.page-section{
+	/* margin: 180rpx 0; */
+	margin-bottom:50rpx;
+}
+.page-sectionAPP{
+	margin: 180rpx 0;
+}
 </style>
